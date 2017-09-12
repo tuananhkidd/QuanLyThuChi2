@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/addwork_style"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="#14aac4"
+            android:textSize="20sp"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Công Việc"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/edt_tencv"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập tên công việc"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="#14aac4"
+            android:textSize="20sp"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số tiền"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/edt_sotien"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập số tiền"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="#14aac4"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ngày"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/txt_date"
+            android:textColor="#14aac4"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="16/9/1996"
+            android:textSize="20sp"/>
+        <ImageButton
+            android:id="@+id/img_date"
+            android:layout_weight="4"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:orientation="horizontal">
+        <TextView
+            android:textColor="#14aac4"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giờ"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/txt_time"
+            android:textColor="#14aac4"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12:00 AM"
+            android:textSize="20sp"/>
+        <ImageButton
+            android:id="@+id/img_time"
+            android:layout_weight="4"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

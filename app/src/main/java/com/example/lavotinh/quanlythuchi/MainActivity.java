@@ -2,7 +2,6 @@ package com.example.lavotinh.quanlythuchi;
 
 import android.app.Dialog;
 import java.util.Calendar;;
-import android.icu.util.GregorianCalendar;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
-import java.util.Locale;
-
-import static android.icu.util.GregorianCalendar.*;
 
 public class MainActivity extends AppCompatActivity {
     Button btn_add;
@@ -37,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void initWidget(){
         btn_add = (Button) findViewById(R.id.bt_add);
-       // btn_add.setOnClickListener(this);
         lv_work = (ListView) findViewById(R.id.lv_work );
     }
 

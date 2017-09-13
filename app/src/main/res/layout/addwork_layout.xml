@@ -11,7 +11,7 @@
         android:orientation="horizontal">
         <TextView
             android:textColor="#14aac4"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
     <LinearLayout
         android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="40dp"
         android:orientation="horizontal">
         <TextView
             android:textColor="#14aac4"
@@ -72,18 +72,19 @@
             android:text="16/9/1996"
             android:textSize="20sp"/>
         <ImageButton
+            android:background="@drawable/clock_calendar_style"
             android:id="@+id/img_date"
             android:layout_weight="4"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/clock"
             android:layout_width="match_parent"
-            android:layout_height="32dp" />
+            android:layout_height="40dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="40dp"
         android:orientation="horizontal">
         <TextView
             android:textColor="#14aac4"
@@ -104,13 +105,22 @@
             android:text="12:00 AM"
             android:textSize="20sp"/>
         <ImageButton
+            android:background="@drawable/clock_calendar_style"
             android:id="@+id/img_time"
             android:layout_weight="4"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/calendar"
             android:layout_width="match_parent"
-            android:layout_height="32dp" />
+            android:layout_height="40dp" />
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lưu"
+        android:id="@+id/btn_luu"
+        android:layout_gravity="center"
+        />
 
 
 </LinearLayout>

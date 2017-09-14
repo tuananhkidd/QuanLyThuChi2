@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.lavotinh.quanlythuchi.Database.DBManager;
 import com.example.lavotinh.quanlythuchi.adapter.WorkAdapter;
 import com.example.lavotinh.quanlythuchi.model.work;
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ListView lv_work;
     ArrayAdapter<work> adapter;
     ArrayList<work> listwork;
+    DBManager db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +49,13 @@ public class MainActivity extends AppCompatActivity {
         btn_add = (Button) findViewById(R.id.bt_add);
         lv_work = (ListView) findViewById(R.id.lv_work);
 
-        listwork = new ArrayList<>();
+        db = new DBManager(this);
+        if(db.loadlistWork().size()!=0)
+        listwork = db.loadlistWork();
+        else listwork = new ArrayList<>();
+
         adapter = new WorkAdapter(MainActivity.this, R.layout.work_layout, listwork);
         lv_work.setAdapter(adapter);
-
     }
 
     public void setEvent() {
@@ -73,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 txt_ngay.setText(calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR));
                 String am_pm = null;
-                if (calendar.get(Calendar.HOUR) >= 12) {
+                if (calendar.get(Calendar.HOUR_OF_DAY) > 12) {
                     am_pm = "PM";
                 } else {
                     am_pm = "AM";
@@ -131,15 +138,31 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+                Typeface typeface = Typeface.createFromAsset(getAssets(),"thuphap.TTF");
+
                 dialog.show();
 
                 btn_luu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Random rd = new Random();
-                        int id = rd.nextInt(100);
+                        int id = rd.nextInt(1000);
+                        int money = Integer.parseInt(edt_sotien.getText().toString());
+                        work w = new work(id, edt_tencv.getText().toString(), Integer.parseInt(edt_sotien.getText().toString()), txt_ngay.getText().toString(), txt_gio.getText().toString());
+                        if(money >= 500000){
+                            w.setColor(Color.RED);
+                        }else if(money>=200000){
+                            w.setColor(Color.rgb(245,142,6));
+                        }else if(money>=100000){
+                            w.setColor(Color.GREEN);
+                        }else{
+                            w.setColor(Color.BLUE);
+                        }
 
-                        listwork.add(new work(id, edt_tencv.getText().toString(), Integer.parseInt(edt_sotien.getText().toString()), txt_ngay.getText().toString(), txt_gio.getText().toString()));
+
+                        listwork.add(w);
+
+                        db.addWork(w);
 
                         adapter.notifyDataSetChanged();
 

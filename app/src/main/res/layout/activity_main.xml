@@ -6,15 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@drawable/addroom"
     tools:context="com.example.lavotinh.quanlythuchi.MainActivity">
 
     <Button
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:id="@+id/bt_add"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="ADD"/>
     <ListView
+        android:divider="#ed1c1c"
+        android:dividerHeight="2dp"
         android:id="@+id/lv_work"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>

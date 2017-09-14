@@ -10,6 +10,7 @@ public class work {
     private int sumOfMoney;
     private String date;
     private String time;
+    private int color;
 
     public work(int ID, String name, int sumOfMoney, String date, String time) {
         this.ID = ID;
@@ -60,5 +61,13 @@ public class work {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

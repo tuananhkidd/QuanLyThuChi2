@@ -12,6 +12,15 @@ public class work {
     private String time;
     private int color;
 
+    public work(int ID, String name, int sumOfMoney, String date, String time, int color) {
+        this.ID = ID;
+        this.name = name;
+        this.sumOfMoney = sumOfMoney;
+        this.date = date;
+        this.time = time;
+        this.color = color;
+    }
+
     public work(int ID, String name, int sumOfMoney, String date, String time) {
         this.ID = ID;
         this.name = name;

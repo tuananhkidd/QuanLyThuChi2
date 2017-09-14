@@ -7,13 +7,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DialogTitle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,17 +28,20 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.lavotinh.quanlythuchi.Database.DBManager;
 import com.example.lavotinh.quanlythuchi.adapter.WorkAdapter;
+import com.example.lavotinh.quanlythuchi.model.IWork;
 import com.example.lavotinh.quanlythuchi.model.work;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IWork {
     Button btn_add;
     ListView lv_work;
     ArrayAdapter<work> adapter;
     ArrayList<work> listwork;
     DBManager db;
+    public int POS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,54 @@ public class MainActivity extends AppCompatActivity {
 
         initWidget();
         setEvent();
+
+        registerForContextMenu(lv_work);
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.menu_work, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemEdit: {
+                editInfo();
+                break;
+            }
+            case R.id.itemDel: {
+                delWork();
+                break;
+            }
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void delWork() {
+        AlertDialog.Builder alBuilder = new AlertDialog.Builder(MainActivity.this);
+        alBuilder.setMessage("Bạn có chắc chắn muốn xóa ?");
+        alBuilder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                db.delWork(listwork.get(POS));
+                listwork.remove(POS);
+                adapter.notifyDataSetChanged();
+                Toast.makeText(MainActivity.this, "Đã Xóa !" + db.loadlistWork().size() + " POS = " + POS, Toast.LENGTH_SHORT).show();
+                dialogInterface.dismiss();
+            }
+        });
+
+        alBuilder.setNegativeButton("Không", null);
+
+        Dialog dialog = alBuilder.create();
+        dialog.show();
+    }
+
+
+    private void editInfo() {
 
     }
 
@@ -54,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         listwork = db.loadlistWork();
         else listwork = new ArrayList<>();
 
-        adapter = new WorkAdapter(MainActivity.this, R.layout.work_layout, listwork);
+        adapter = new WorkAdapter(MainActivity.this, R.layout.work_layout, listwork, this);
         lv_work.setAdapter(adapter);
     }
 
@@ -62,8 +118,11 @@ public class MainActivity extends AppCompatActivity {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(MainActivity.this);
-                dialog.setTitle("Thêm Công Việc");
+                final Dialog dialog = new Dialog(MainActivity.this, android.R.style.Theme_Material_Dialog_NoActionBar);
+                //dialog.setTitle("Thêm Công Việc");
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+
                 dialog.setContentView(R.layout.addwork_layout);
 
                 final EditText edt_tencv = dialog.findViewById(R.id.edt_tencv);
@@ -140,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Typeface typeface = Typeface.createFromAsset(getAssets(),"thuphap.TTF");
 
+
                 dialog.show();
 
                 btn_luu.setOnClickListener(new View.OnClickListener() {
@@ -177,4 +237,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemselected(int pos) {
+        POS = pos;
+    }
 }

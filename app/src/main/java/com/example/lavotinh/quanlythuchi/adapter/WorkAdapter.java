@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 
 import com.example.lavotinh.quanlythuchi.R;
+import com.example.lavotinh.quanlythuchi.model.IWork;
 import com.example.lavotinh.quanlythuchi.model.work;
 
 import java.util.ArrayList;
@@ -26,16 +27,19 @@ public class WorkAdapter extends ArrayAdapter<work>{
     private Context context;
     private int layout;
     private ArrayList<work> list;
-    public WorkAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<work> objects) {
+    private IWork iWork;
+
+    public WorkAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<work> objects, IWork iWork) {
         super(context, resource, objects);
         this.context = context;
         this.layout = resource;
         this.list = objects;
+        this.iWork = iWork;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         viewHolder viewHolder = null;
         if(convertView == null){
             viewHolder = new viewHolder();
@@ -45,6 +49,14 @@ public class WorkAdapter extends ArrayAdapter<work>{
             viewHolder.txt_Conten = convertView.findViewById(R.id.txt_content);
             viewHolder.txt_Money = convertView.findViewById(R.id.txt_money);
             viewHolder.txt_dateTime = convertView.findViewById(R.id.txt_datetime);
+
+            convertView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    iWork.onItemselected(position);
+                    return false;
+                }
+            });
 
             convertView.setTag(viewHolder);
         }else{
